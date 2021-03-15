@@ -2,20 +2,15 @@ import React from 'react';
 import { Container } from "react-bootstrap";
 import * as localStorage from "../../services/localStorage.js";
 import * as quests from "../../services/quests.js";
+import QuestCards from "./QuestCards";
 
 class QuestTable extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            activeQuests: quests.getActiveQuests(),
-            completedQuests: quests.getCompletedQuests(),
-            lockedQuests: quests.getLockedQuests(),
-            filters: {
-                showActiveQuests: true,
-                showCompletedQuests: true,
-                showLockedQuests: true
-            }
+            allQuests: this.getAllQuests(),
+            filters: [],
         }
         console.log(this.state)
     }
@@ -37,18 +32,23 @@ class QuestTable extends React.Component {
         }
     }
 
-    updateQuests() {
-        this.setState({
-            activeQuests: quests.getActiveQuests(),
-            completedQuests: quests.getCompletedQuests(),
-            lockedQuests: quests.getLockedQuests()
-        })
+    getAllQuests() {
+        let activeQuests = quests.getActiveQuests()
+        let completedQuests = quests.getCompletedQuests()
+        let lockedQuests = quests.getLockedQuests()
+        return activeQuests.concat(lockedQuests, completedQuests)
+    }
+
+    getFilteredQuests() {
+        return this.state.allQuests.filter(
+            quest => this.state.filters.every(filter => filter(quest))
+        )
     }
 
     render() {
         return (
             <Container>
-                {/* <QuestCards questDataList={questDataList}></QuestCards> */}
+                <QuestCards questDataList={this.getFilteredQuests()}></QuestCards>
             </Container>
         );
     }
