@@ -6,7 +6,7 @@ class QuestCards extends React.Component {
     render() {
         return (
             <Row>
-                {this.props.questData.map(quest => { return <QuestCard questData={quest} key={quest.id}></QuestCard> })}
+                {this.props.questDataList.map(quest => { return <QuestCard questData={quest} key={quest.id}></QuestCard> })}
             </Row>
         );
     }
