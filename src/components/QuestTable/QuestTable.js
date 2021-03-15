@@ -1,20 +1,20 @@
 import React from 'react';
 import { Container } from "react-bootstrap";
-import questData from '../../resources/quests.json';
+import questDataList from '../../resources/quests.json';
 import QuestCards from './QuestCards.js';
 
 class QuestTable extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            questData: questData
+            questDataList: questDataList
         }
     }
 
     render() {
         return (
             <Container>
-                <QuestCards questData={questData}></QuestCards>
+                <QuestCards questDataList={questDataList}></QuestCards>
             </Container>
         );
     }
