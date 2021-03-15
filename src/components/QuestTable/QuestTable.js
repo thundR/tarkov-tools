@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import * as localStorage from "../../services/localStorage.js";
 import * as quests from "../../services/quests.js";
 import QuestCards from "./QuestCards";
+import QuestFilter from "./QuestFilter";
 
 class QuestTable extends React.Component {
     constructor(props) {
@@ -10,9 +11,9 @@ class QuestTable extends React.Component {
 
         this.state = {
             allQuests: this.getAllQuests(),
-            filters: [],
+            filter: q => true,
         }
-        console.log(this.state)
+        this.setFilter = this.setFilter.bind(this)
     }
 
     setQuestCompletion(questID, completed) {
@@ -40,14 +41,17 @@ class QuestTable extends React.Component {
     }
 
     getFilteredQuests() {
-        return this.state.allQuests.filter(
-            quest => this.state.filters.every(filter => filter(quest))
-        )
+        return this.state.allQuests.filter(this.state.filter)
+    }
+
+    setFilter(filter) {
+        this.setState({ filter: filter })
     }
 
     render() {
         return (
             <Container>
+                <QuestFilter setFilter={this.setFilter}></QuestFilter>
                 <QuestCards questDataList={this.getFilteredQuests()}></QuestCards>
             </Container>
         );
