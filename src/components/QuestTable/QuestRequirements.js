@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Row, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 
 class QuestRequirements extends React.Component {
     render() {
@@ -67,6 +67,7 @@ class QuestRequirements extends React.Component {
                             </div>
                         );
                     }
+                    return <div></div>
                 }
                 )}
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Row, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 import QuestRequirements from './QuestRequirements';
 
 class QuestCard extends React.Component {
